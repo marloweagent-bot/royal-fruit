@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Royal Family of Fruit | A Natural History Exhibition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --royal-purple: #2D1B4E;
+            --gold: #C9A227;
+            --cream: #F5F0E1;
+            --burgundy: #722F37;
+            --deep-green: #1B4D3E;
+            --mango-gold: #FFB347;
+            --watermelon-green: #4A7C59;
+            --raspberry-red: #8B2346;
+            --blueberry-blue: #4169E1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--cream);
+            color: #2C2416;
+            line-height: 1.7;
+        }
+
+        /* Ornate Border Pattern */
+        .ornate-border {
+            border: 3px double var(--gold);
+            position: relative;
+        }
+
+        .ornate-border::before,
+        .ornate-border::after {
+            content: '❧';
+            position: absolute;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .ornate-border::before {
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ornate-border::after {
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%) rotate(180deg);
+        }
+
+        /* Header / Royal Crest */
+        .royal-header {
+            background: linear-gradient(180deg, var(--royal-purple) 0%, #1a0f2e 100%);
+            color: var(--cream);
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .royal-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 15L45 15L37 22L40 32L30 26L20 32L23 22L15 15L25 15Z' fill='%23C9A22710'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .crest {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .royal-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .royal-header .subtitle {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+        }
+
+        .established {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            opacity: 0.8;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-ornament {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.15em;
+        }
+
+        h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--burgundy);
+        }
+
+        .section-intro {
+            text-align: center;
+            font-size: 1.2rem;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: #5a4a3a;
+        }
+
+        /* Royal Member Cards */
+        .royal-card {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding: 3rem;
+            background: white;
+            border: 2px solid var(--gold);
+            position: relative;
+        }
+
+        .royal-card.reverse {
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .royal-card.reverse .portrait {
+            order: 2;
+        }
+
+        .portrait {
+            text-align: center;
+        }
+
+        .portrait-frame {
+            display: inline-block;
+            padding: 1rem;
+            border: 4px solid var(--gold);
+            background: linear-gradient(135deg, #f9f6ef 0%, #e8e0d0 100%);
+            position: relative;
+        }
+
+        .portrait-frame::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--gold);
+        }
+
+        .portrait-emoji {
+            font-size: 8rem;
+            line-height: 1;
+            display: block;
+            padding: 1rem;
+        }
+
+        .portrait-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            margin-top: 1rem;
+            color: var(--burgundy);
+        }
+
+        .royal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--royal-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .royal-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .royal-epithet {
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .credentials {
+            margin-bottom: 1.5rem;
+        }
+
+        .credentials li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .credentials li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .evidence-quote {
+            background: #f9f6ef;
+            padding: 1.5rem;
+            border-left: 4px solid var(--gold);
+            font-style: italic;
+            margin-top: 1.5rem;
+        }
+
+        .evidence-source {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #888;
+            font-style: normal;
+        }
+
+        /* The Queen Section - Special Styling */
+        .queen-section {
+            background: linear-gradient(180deg, #fff8e7 0%, var(--cream) 100%);
+            border-top: 4px solid var(--gold);
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .queen-section .royal-card {
+            background: linear-gradient(135deg, #fffef7 0%, #fff8e7 100%);
+            border-color: var(--mango-gold);
+            box-shadow: 0 0 30px rgba(201, 162, 39, 0.2);
+        }
+
+        /* The Bastard Section - Darker, Scandalous */
+        .bastard-section {
+            background: #f0ebe0;
+        }
+
+        .bastard-section .royal-card {
+            background: #fafafa;
+            border-color: #999;
+            border-style: dashed;
+        }
+
+        .scandal-notice {
+            background: var(--burgundy);
+            color: var(--cream);
+            padding: 1rem 2rem;
+            text-align: center;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Family Tree */
+        .family-tree {
+            background: var(--royal-purple);
+            color: var(--cream);
+            padding: 5rem 2rem;
+        }
+
+        .family-tree h2 {
+            color: var(--gold);
+        }
+
+        .tree-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tree-row {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .tree-member {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid var(--gold);
+            min-width: 150px;
+        }
+
+        .tree-member.queen {
+            background: rgba(201, 162, 39, 0.2);
+            border-width: 3px;
+        }
+
+        .tree-member.bastard {
+            border-style: dashed;
+            opacity: 0.8;
+        }
+
+        .tree-emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tree-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+        }
+
+        .tree-name {
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .tree-connector {
+            width: 2px;
+            height: 40px;
+            background: var(--gold);
+        }
+
+        .tree-branch {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .tree-branch::before {
+            content: '';
+            width: 150px;
+            height: 2px;
+            background: var(--gold);
+            margin-top: 40px;
+        }
+
+        /* Nutritional Evidence Table */
+        .evidence-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .evidence-table th {
+            background: var(--royal-purple);
+            color: var(--cream);
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.1em;
+        }
+
+        .evidence-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .evidence-table tr:nth-child(even) {
+            background: #f9f6ef;
+        }
+
+        /* Footer / Proclamation */
+        .proclamation {
+            background: var(--burgundy);
+            color: var(--cream);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .proclamation h2 {
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .seal {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .proclamation-text {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .museum-credit {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .royal-card,
+            .royal-card.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .royal-card.reverse .portrait {
+                order: 0;
+            }
+
+            .royal-header h1 {
+                font-size: 1.8rem;
+                letter-spacing: 0.1em;
+            }
+
+            .portrait-emoji {
+                font-size: 5rem;
+            }
+
+            .tree-row {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Royal Header -->
+    <header class="royal-header">
+        <div class="crest">👑🍎👑</div>
+        <h1>The Royal Family of Fruit</h1>
+        <p class="subtitle">A Natural History Exhibition</p>
+        <p class="established">Est. Anno Domini MDCCCLXII · Royal Botanical Society</p>
+    </header>
+
+    <!-- Introduction -->
+    <section>
+        <div class="section-ornament">❦</div>
+        <h2>Curator's Preface</h2>
+        <p class="section-intro">
+            Just as the great houses of Europe established their dominion through lineage, virtue, and divine right, 
+            so too does the Kingdom of Fruit possess its own noble hierarchy. This exhibition presents, 
+            for the enlightenment of the public, the irrefutable evidence establishing the <em>Mangifera indica</em> 
+            as sovereign, and the proper stations of her royal issue.
+        </p>
+        <p class="section-intro">
+            The classifications herein are drawn from botanical evidence, historical record, nutritional virtue, 
+            and the immutable laws of natural aristocracy. We invite you to witness the majesty of the Fruit Crown.
+        </p>
+    </section>
+
+    <!-- The Queen: Mango -->
+    <section class="queen-section">
+        <div class="section-ornament">♔</div>
+        <h2>Her Majesty The Queen</h2>
+        
+        <div class="royal-card">
+            <div class="portrait">
+                <div class="portrait-frame">
+                    <span class="portrait-emoji">🥭</span>
+                </div>
+                <p class="portrait-label">Official Royal Portrait</p>
+            </div>
+            <div class="biography">
+                <p class="royal-title">Her Royal Highness</p>
+                <h3 class="royal-name" style="color: var(--mango-gold);">The Mango</h3>
+                <p class="royal-epithet">"Regina Fructuum" · Queen of All Fruits</p>
+                
+                <ul class="credentials">
+                    <li><strong>Reign:</strong> Over 4,000 years of documented cultivation</li>
+                    <li><strong>Dominion:</strong> Indigenous to South Asia; now beloved across six continents</li>
+                    <li><strong>Royal Lineage:</strong> Over 500 noble varieties descended from the original throne</li>
+                    <li><strong>Divine Favour:</strong> Sacred in Hindu tradition; offered to deities and royalty alike</li>
+                </ul>
+
+                <h3>Evidence of Sovereignty</h3>
+                <p>
+                    The Mango's claim to the throne is not merely ceremonial—it is earned through 
+                    <strong>unparalleled nutritional virtue</strong>. A single fruit provides 75% of the daily 
+                    requirement of Vitamin C, contains 25 different carotenoids, and delivers Vitamins A, B6, 
+                    and folate in quantities no other fruit can match.
+                </p>
+                <p style="margin-top: 1rem;">
+                    Her aromatic presence announces her arrival before she is seen—a quality befitting true royalty. 
+                    The Sanskrit word <em>āmra</em> appears in texts dating to 4000 BCE, establishing her reign 
+                    as the oldest documented fruit monarchy.
+                </p>
+
+                <div class="evidence-quote">
+                    "The mango is called the King of Fruits due to its rich history, unmatched taste, 
+                    high nutritional value, cultural significance, and worldwide popularity. 
+                    It combines health benefits with a unique flavour that no other fruit offers."
+                    <span class="evidence-source">— Agricultural Historical Record, 2025</span>
+                </div>
+            </div>
+        </div>
+
+        <table class="evidence-table">
+            <thead>
+                <tr>
+                    <th>Royal Attribute</th>
+                    <th>Evidence</th>
+                    <th>Significance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Vitamin C</td>
+                    <td>75% daily value per serving</td>
+                    <td>Immune sovereignty</td>
+                </tr>
+                <tr>
+                    <td>Carotenoid Variety</td>
+                    <td>25 distinct types</td>
+                    <td>Unmatched complexity of character</td>
+                </tr>
+                <tr>
+                    <td>Historical Record</td>
+                    <td>4,000+ years cultivation</td>
+                    <td>Ancient and legitimate claim</td>
+                </tr>
+                <tr>
+                    <td>Global Recognition</td>
+                    <td>Grown in 100+ countries</td>
+                    <td>Universal acknowledgment of reign</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- The Prince: Watermelon -->
+    <section>
+        <div class="section-ornament">♕</div>
+        <h2>His Royal Highness The Prince</h2>
+        
+        <div class="royal-card reverse">
+            <div class="biography">
+                <p class="royal-title">Crown Prince of the Realm</p>
+                <h3 class="royal-name" style="color: var(--watermelon-green);">The Watermelon</h3>
+                <p class="royal-epithet">"Princeps Magnus" · The Great Prince</p>
+                
+                <ul class="credentials">
+                    <li><strong>Lineage:</strong> 4,000+ years of recorded history; depicted in Egyptian royal tombs</li>
+                    <li><strong>Stature:</strong> The largest of all fruits—a commanding physical presence</li>
+                    <li><strong>Virtue:</strong> 92% water content; the life-giving sustainer of desert kingdoms</li>
+                    <li><strong>Heraldry:</strong> Bearer of the green and red; colours of vitality and passion</li>
+                </ul>
+
+                <h3>The Case for Succession</h3>
+                <p>
+                    The Watermelon stands as heir apparent not through mere birthright, but through 
+                    <strong>demonstrated capability to sustain life</strong>. In the Kalahari Desert, 
+                    the wild tsamma melon—ancestor to our noble Prince—sustained the San people for 
+                    six weeks at a time, providing both water and nourishment where no other source existed.
+                </p>
+                <p style="margin-top: 1rem;">
+                    His Sanskrit name appears in texts contemporary with the Mango Queen herself, 
+                    and his likeness adorns the tombs of Pharaohs. Rich in beta-carotene and lycopene, 
+                    the Prince carries within him the seeds of future generations—literally, 
+                    for he may contain up to 500 seeds per fruit.
+                </p>
+
+                <div class="evidence-quote">
+                    "The fruits are used by the San people and wild animals for both water and nourishment, 
+                    allowing survival on a diet of tsamma for six weeks. The watermelon is a symbol 
+                    of fertility, abundance and vitality."
+                    <span class="evidence-source">— Botanical Record & Cultural Studies</span>
+                </div>
+            </div>
+            <div class="portrait">
+                <div class="portrait-frame">
+                    <span class="portrait-emoji">🍉</span>
+                </div>
+                <p class="portrait-label">His Royal Countenance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Princess: Raspberry -->
+    <section style="background: linear-gradient(180deg, var(--cream) 0%, #f8f0f2 100%);">
+        <div class="section-ornament">♛</div>
+        <h2>Her Royal Highness The Princess</h2>
+        
+        <div class="royal-card">
+            <div class="portrait">
+                <div class="portrait-frame">
+                    <span class="portrait-emoji">🍇</span>
+                </div>
+                <p class="portrait-label">Portrait in the Victorian Style</p>
+            </div>
+            <div class="biography">
+                <p class="royal-title">Princess of the Blood Royal</p>
+                <h3 class="royal-name" style="color: var(--raspberry-red);">The Raspberry</h3>
+                <p class="royal-epithet">"Rubus Idaeus" · Discovered by the Gods Themselves</p>
+                
+                <ul class="credentials">
+                    <li><strong>Divine Origin:</strong> Named for Mount Ida, where Greek Gods first discovered her</li>
+                    <li><strong>Victorian Virtue:</strong> Symbol of perfection, sweetness of character, and modesty</li>
+                    <li><strong>Medicinal Grace:</strong> Healing properties documented since 1597 in "The Herbal"</li>
+                    <li><strong>Roman Cultivation:</strong> Tended in Roman gardens since the 4th century</li>
+                </ul>
+
+                <h3>The Princess's Virtue</h3>
+                <p>
+                    If the Mango rules through power and the Watermelon through might, the Raspberry governs 
+                    through <strong>grace and healing virtue</strong>. Her therapeutic use was first recorded 
+                    in 1597 in John Gerard's "The Herbal, or A General History of Plants"—a text that 
+                    established her as medicine before she was known as mere sustenance.
+                </p>
+                <p style="margin-top: 1rem;">
+                    The Victorians understood her true nature: she embodied <em>perfection, sweetness of character, 
+                    and modesty</em>—the very qualities expected of a princess of proper breeding. 
+                    Her rich colour was said to represent the blood of Christ himself, and her leaves 
+                    were prescribed to ease the pains of childbirth among noble ladies.
+                </p>
+
+                <div class="evidence-quote">
+                    "By the Victorian period, the raspberry was said to symbolize perfection, 
+                    sweetness of character, and modesty. There is a legend that the raspberry's 
+                    scientific name, Rubus idaeus, was derived from Mount Ida in Turkey, 
+                    where Greek Gods discovered the raspberry."
+                    <span class="evidence-source">— Historical & Medicinal Records</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Bastard: Blueberry -->
+    <section class="bastard-section">
+        <div class="section-ornament" style="color: #666;">⚔</div>
+        <h2>The Natural Issue</h2>
+        
+        <div class="scandal-notice">
+            <em>The following entry is included for purposes of completeness and historical accuracy. 
+            The Crown acknowledges no formal legitimacy.</em>
+        </div>
+        
+        <div class="royal-card">
+            <div class="portrait">
+                <div class="portrait-frame" style="border-color: #666;">
+                    <span class="portrait-emoji">🫐</span>
+                </div>
+                <p class="portrait-label" style="color: #666;">No Official Portrait Exists</p>
+            </div>
+            <div class="biography">
+                <p class="royal-title" style="color: #666;">Natural Child of Unknown Provenance</p>
+                <h3 class="royal-name" style="color: var(--blueberry-blue);">The Blueberry</h3>
+                <p class="royal-epithet" style="color: #666;">"Vaccinium" · The Colonial Discovery</p>
+                
+                <ul class="credentials">
+                    <li><strong>Origin:</strong> Wild-born in the Americas; unknown to European courts</li>
+                    <li><strong>Legitimacy:</strong> No cultivation until the 20th century—grew without tending</li>
+                    <li><strong>Discovery:</strong> First encountered by English colonists, not royal botanists</li>
+                    <li><strong>Status:</strong> 10,000 years wild before any attempt at domestication</li>
+                </ul>
+
+                <h3>The Question of Legitimacy</h3>
+                <p>
+                    While the true Royals of Fruit trace their lineage through the gardens of Asia, 
+                    the Mediterranean, and the courts of Rome, the Blueberry emerged from 
+                    <strong>the untamed wilderness of the New World</strong>—a land unknown to civilized 
+                    horticulture until mere centuries ago.
+                </p>
+                <p style="margin-top: 1rem;">
+                    The English naturalist John Josselyn, traveling to New England in the 17th century, 
+                    described encountering "bill berries" used by indigenous peoples—a fruit that had never 
+                    graced a royal table nor been tended by trained gardeners. For 10,000 years, the blueberry 
+                    grew wild, without cultivation, without recognition, without name.
+                </p>
+                <p style="margin-top: 1rem;">
+                    It was not until <strong>1911</strong>—well after the Victorian era—that Elizabeth White 
+                    and Dr. Frederick Coville first successfully cultivated the blueberry. By then, 
+                    the throne had long been established, the succession secured, and the Blueberry's 
+                    claim to legitimacy... complicated, at best.
+                </p>
+
+                <div class="evidence-quote" style="border-color: #999;">
+                    "Blueberries are native to our very own continent of North America. 
+                    The first cultivation of blueberries can be traced back to the Native Americans, 
+                    who were the first to discover and cultivate this delicious fruit—
+                    though 'cultivation' is generous; they simply burned the fields to increase yield."
+                    <span class="evidence-source">— Smithsonian Libraries & University of Illinois Extension</span>
+                </div>
+
+                <p style="margin-top: 1.5rem; font-style: italic; color: #666;">
+                    The Crown notes that the Blueberry, despite its... unconventional origins... 
+                    has proven itself possessed of remarkable antioxidant properties and has achieved 
+                    considerable popularity among the common folk. Such is often the way with natural children.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Tree -->
+    <section class="family-tree">
+        <div class="section-ornament">❧</div>
+        <h2>The Royal Lineage</h2>
+        <p class="section-intro" style="color: var(--cream); opacity: 0.9;">
+            A visual representation of the Fruit Monarchy, presented for the edification of scholars and the public alike.
+        </p>
+
+        <div class="tree-visual">
+            <div class="tree-row">
+                <div class="tree-member queen">
+                    <span class="tree-emoji">🥭</span>
+                    <span class="tree-title">HER MAJESTY</span>
+                    <span class="tree-name">The Mango</span>
+                </div>
+            </div>
+            
+            <div class="tree-connector"></div>
+            
+            <div class="tree-row">
+                <div class="tree-member">
+                    <span class="tree-emoji">🍉</span>
+                    <span class="tree-title">CROWN PRINCE</span>
+                    <span class="tree-name">The Watermelon</span>
+                </div>
+                <div class="tree-member">
+                    <span class="tree-emoji">🍇</span>
+                    <span class="tree-title">PRINCESS ROYAL</span>
+                    <span class="tree-name">The Raspberry</span>
+                </div>
+                <div class="tree-member bastard">
+                    <span class="tree-emoji">🫐</span>
+                    <span class="tree-title" style="color: #999;">NATURAL CHILD</span>
+                    <span class="tree-name">The Blueberry</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proclamation Footer -->
+    <footer class="proclamation">
+        <div class="seal">🏛️</div>
+        <h2>Royal Proclamation</h2>
+        <p class="proclamation-text">
+            Let it be known throughout the realm that the hierarchy herein established 
+            shall stand in perpetuity, grounded in botanical evidence, historical record, 
+            and the immutable laws of natural virtue. 
+            <br><br>
+            The Mango reigns supreme. The Watermelon stands ready to serve. 
+            The Raspberry embodies grace. And the Blueberry... exists.
+            <br><br>
+            <em>So it is written. So it shall be.</em>
+        </p>
+        <p class="museum-credit">
+            This exhibition presented by the Royal Botanical Society<br>
+            In association with the Museum of Natural Aristocracy<br>
+            MDCCCLXII · All Rights Reserved to the Crown
+        </p>
+    </footer>
+
+</body>
+</html>
